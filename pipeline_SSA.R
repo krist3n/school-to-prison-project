@@ -1,0 +1,28 @@
+#import ggplot2
+library(ggplot2)
+#read in data
+setwd("~/Desktop/BxD/ed_data")
+ssa <- read.csv("ssa-report-2022-2023.csv")
+ssa_b <- read.csv("SSA_Borough.csv")
+ssa_r <- read.csv("SSA_Race.csv")
+ssa_bronx <- read.csv("SSA_Bronx.csv")
+#pie charts
+ssa_br <- c(170262, 269044, 129942, 274177, 63552)
+ssa_br_lbl <- c("Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island")
+br_colors <- c("gold", "steelblue4", "royalblue4", "turquoise4", "mediumaquamarine")
+pie(ssa_br, labels = ssa_br_lbl, main="Citywide SSA Reports by Borough (2022-23)", col=br_colors)
+ssa_r <- c(181396, 371001, 148103, 168042, 38435)
+ssa_r_lbl <- c("Black", "Hispanic", "White Non-Hispanic", "Asian/Pacific Isl.", "Other")
+r_colors <- c("gold", "steelblue4", "royalblue4", "turquoise4", "mediumaquamarine")
+pie(ssa_r, labels = ssa_r_lbl, main="Citywide SSA Reports by Race/Ethnicity (2022-23)", col=r_colors)
+ssa_bx <- c(40591, 106889, 8585, 9571, 4626)
+ssa_bx_lbl <- c("Black", "Hispanic", "White Non-Hispanic", "Asian/Pacific Isl.", "Other")
+bx_colors <- c("gold", "steelblue4", "royalblue4", "turquoise4", "mediumaquamarine")
+pie(ssa_bx, labels = ssa_bx_lbl, main="Bronx SSA Reports by Race/Ethnicity (2022-23)", col=bx_colors)
+#bar graphs
+df1 <- data.frame(Key = c("Percent of Total Enrollment", "Percent of Total Enrollment", "Percent of Total Enrollment", "Percent of Total Enrollment", "Percent of Total Enrollment", "Percent of Total SSA Reports", "Percent of Total SSA Reports", "Percent of Total SSA Reports", "Percent of Total SSA Reports", "Percent of Total SSA Reports"), Borough = c("Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island"), perc = c(18.8, 29.7, 14.3, 30.2, 7, 24.9, 28.7, 12.5, 23.2, 10.6))
+ggplot(df1,aes(x = Borough, y = perc, fill = Key)) + geom_bar(stat = "identity", position = "dodge") + ggtitle("SSA Reports by Borough (2022-23)") + labs(y = "Percent", x = "Borough") + scale_fill_manual(values=c("lightskyblue", "lightseagreen"))
+df2 <- data.frame(Key = c("Percent of Total Enrollment", "Percent of Total Enrollment", "Percent of Total Enrollment", "Percent of Total Enrollment", "Percent of Total Enrollment", "Percent of Total SSA Reports", "Percent of Total SSA Reports", "Percent of Total SSA Reports", "Percent of Total SSA Reports", "Percent of Total SSA Reports"), Race = c("Black", "Hispanic", "White Non-Hispanic", "Asian/Pacific Isl.", "Other"), perc = c(20.0, 40.9, 16.3, 18.5, 4.3, 49.2, 38.2, 6.2, 3.7, 2.7))
+ggplot(df2,aes(x = Race, y = perc, fill = Key)) + geom_bar(stat = "identity", position = "dodge") + ggtitle("SSA Reports by Race/Ethnicity (2022-23)") + labs(y = "Percent", x = "Race/Ethnicity") + scale_fill_manual(values=c("lightskyblue", "lightseagreen"))
+df3 <- data.frame(Key = c("Percent of Total Bronx Enrollment", "Percent of Total Bronx Enrollment", "Percent of Total Bronx Enrollment", "Percent of Total Bronx Enrollment", "Percent of Total Bronx Enrollment", "Percent of Total Bronx SSA Reports", "Percent of Total Bronx SSA Reports", "Percent of Total Bronx SSA Reports", "Percent of Total Bronx SSA Reports", "Percent of Total Bronx SSA Reports"), Race = c("Black", "Hispanic", "White Non-Hispanic", "Asian/Pacific Isl.", "Other"), perc = c(23.8,62.8,5,5.6,2.7,43.3,52.7,2,0.7,1.2))
+ggplot(df3,aes(x = Race, y = perc, fill = Key)) + geom_bar(stat = "identity", position = "dodge") + ggtitle("Bronx SSA Reports by Race/Ethnicity (2022-23)") + labs(y = "Percent", x = "Race/Ethnicity") + scale_fill_manual(values=c("lightskyblue", "lightseagreen"))
